@@ -43,6 +43,7 @@ pipenv install
 pipenv shell
 
 # Export FMPCloud API key to environment variable
+# If you don't have subscription yet, use `demo` for api key value
 export FMPCLOUD_API_KEY=api_key_value
 
 # Run the script, get statements for all years
