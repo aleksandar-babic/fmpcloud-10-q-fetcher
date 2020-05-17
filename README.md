@@ -1,6 +1,6 @@
 # FMPCloud 10-Q statements fetcher
 
-Python script that uses `FMPCloud API` to fetch 10-Q statements for given company.
+Python script that uses `FMPCloud API` to fetch 10-Q and 10-K statements for given company.
 
 ## Usage
 ```shell script
@@ -18,7 +18,7 @@ usage:
     main.py --ticker HUBS --end 2018
     
 
-Script to fetch and parse Edgar 10-Q financial statements.
+Script to fetch and parse Edgar 10-Q and 10-K financial statements.
 
 optional arguments:
   -h, --help       show this help message and exit

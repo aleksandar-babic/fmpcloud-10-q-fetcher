@@ -55,10 +55,13 @@ def is_filename_match(exclude_rules: list, endswith_rules: list, filename: str) 
     return True
 
 
-def generate_target_filenames(source_directory: str, start_range: int, end_range: int) -> list:
+def generate_target_filenames(source_directory: str, start_range: int, end_range: int,
+                              include_10k: bool = True) -> list:
     target_files = []
     for filename in listdir(source_directory):
-        if not is_filename_match(['10-K'], ['.xlsx', '.xls'], filename):
+        exclude_filters = [] if include_10k else ['10-K']
+
+        if not is_filename_match(exclude_filters, ['.xlsx', '.xls'], filename):
             continue
 
         file = path.join(source_directory, filename)

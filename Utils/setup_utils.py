@@ -13,7 +13,7 @@ def setup_dir(dir_path: str):
 
 
 def setup_args() -> dict:
-    description = 'Script to fetch and parse Edgar 10-Q financial statements.'
+    description = 'Script to fetch and parse Edgar 10-Q and 10-K financial statements.'
     usage = '''
     # Get all available statements
     main.py --ticker HUBS
