@@ -1,6 +1,6 @@
 # FMPCloud 10-Q statements fetcher
 
-Python script that uses `FMPCloud API` to fetch 10-Q statements for company.
+Python script that uses `FMPCloud API` to fetch 10-Q statements for given company.
 
 ## Usage
 ```shell script
