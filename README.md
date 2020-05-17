@@ -30,7 +30,7 @@ optional arguments:
 ## Setup
 
 ### Requirements:
-* FMPCloud API Pro account
+* [FMPCloud API Pro account](https://fmpcloud.io/)
 * Python 3.8
 * Pipenv
 
