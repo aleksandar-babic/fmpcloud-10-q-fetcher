@@ -1,0 +1,5 @@
+# Jetbrains IDEs
+*.idea*
+
+# Don't version data files
+data/*
