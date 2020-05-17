@@ -36,11 +36,14 @@ optional arguments:
 
 ### Setup steps:
 ```shell script
-# Export FMPCloud API key to environment variable
-export FMPCLOUD_API_KEY=api_key_value
-
 # Install dependencies
 pipenv install
+
+# Spawn venv shell
+pipenv shell
+
+# Export FMPCloud API key to environment variable
+export FMPCLOUD_API_KEY=api_key_value
 
 # Run the script, get statements for all years
 python main.py --ticker NFLX
