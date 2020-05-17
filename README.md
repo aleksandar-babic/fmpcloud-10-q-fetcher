@@ -34,7 +34,7 @@ optional arguments:
 * Python 3.8
 * Pipenv
 
-### Steps
+### Setup steps:
 ```shell script
 # Export FMPCloud API key to environment variable
 export FMPCLOUD_API_KEY=api_key_value
