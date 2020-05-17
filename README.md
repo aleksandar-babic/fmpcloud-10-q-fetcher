@@ -30,7 +30,7 @@ optional arguments:
 ## Setup
 
 ### Requirements:
-* [FMPCloud API Pro account](https://fmpcloud.io/)
+* [FMPCloud API account](https://fmpcloud.io/plans)
 * Python 3.8
 * Pipenv
 
@@ -43,7 +43,7 @@ pipenv install
 pipenv shell
 
 # Export FMPCloud API key to environment variable
-# If you don't have subscription yet, use `demo` for api key value
+# If you don't have the account yet, use `demo` for api key value
 export FMPCLOUD_API_KEY=api_key_value
 
 # Run the script, get statements for all years
