@@ -8,6 +8,7 @@ pytest = "*"
 pytest-mock = "*"
 requests-mock = "*"
 pyfakefs = "*"
+pytest-cov = "*"
 
 [packages]
 requests = "*"

@@ -55,3 +55,19 @@ python main.py --ticker NFLX --start 2010 --end 2015
 > Transformed resulting report will be saved in the `data` directory.
   
 > Directory `data/.raw` contains untransformed data received from the API.
+
+### Running tests
+```shell script
+# Install dependencies
+pipenv install
+
+# Spawn venv shell
+pipenv shell
+
+# Run pytest tests
+python -m pytest
+
+# Run pytest tests with coverage
+ python -m pytest --cov='.' --cov-report=html
+```
+> HTML coverage reports will be saved in the `htmlcov` directory.
