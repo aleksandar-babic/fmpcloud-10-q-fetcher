@@ -3,3 +3,6 @@
 
 # Don't version data files
 data/*
+
+# Pycache
+*__pycache__**
