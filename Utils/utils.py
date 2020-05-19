@@ -1,7 +1,8 @@
 import logging
 import sys
 import re
-from os import environ, listdir, path
+import os
+from typing import Union
 from zipfile import ZipFile
 from pathlib import Path
 from datetime import datetime
@@ -15,7 +16,7 @@ def get_logger() -> logging.Logger:
 
 
 def safe_get_env_var(env_var: str) -> str:
-    key = environ.get(env_var)
+    key = os.environ.get(env_var)
 
     if key is None:
         raise ValueError(f'{env_var} is required. Set it as environment variable!')
@@ -37,14 +38,20 @@ def unzip_pwd(zip_path: str) -> str:
     return path_wo_extension
 
 
-def get_date_from_filename(initial: str) -> str:
-    return re.search(r'([0-9]{4}-[0-9]{2}-[0-9]{2})', initial).group(1)
+def get_date_from_filename(initial: str) -> Union[str, None]:
+    try:
+        return re.search(r'([0-9]{4}-[0-9]{2}-[0-9]{2})', initial).group(1)
+    except AttributeError:
+        return None
 
 
 def is_date_in_range(date: str, start_range: int, end_range: int) -> bool:
-    date_year = int(date.split('-')[0])
+    try:
+        date_year = int(date.split('-')[0])
 
-    return start_range <= date_year <= end_range
+        return start_range <= date_year <= end_range
+    except ValueError:
+        raise ValueError('date must start with a year, example, YYYY-MM-DD.')
 
 
 def is_filename_match(exclude_rules: list, endswith_rules: list, filename: str) -> bool:
@@ -58,13 +65,13 @@ def is_filename_match(exclude_rules: list, endswith_rules: list, filename: str) 
 def generate_target_filenames(source_directory: str, start_range: int, end_range: int,
                               include_10k: bool = True) -> list:
     target_files = []
-    for filename in listdir(source_directory):
+    for filename in os.listdir(source_directory):
         exclude_filters = [] if include_10k else ['10-K']
 
         if not is_filename_match(exclude_filters, ['.xlsx', '.xls'], filename):
             continue
 
-        file = path.join(source_directory, filename)
+        file = os.path.join(source_directory, filename)
 
         filename_only_date = get_date_from_filename(filename)
 
