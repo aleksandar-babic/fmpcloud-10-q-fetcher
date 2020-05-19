@@ -1,6 +1,10 @@
 import requests
 
 
+class InvalidFMPCloudApiKey(Exception):
+    pass
+
+
 class FMPCloudApiClient:
     BASE_URL = 'https://fmpcloud.io/api/v3'
     ENDPOINTS = {
