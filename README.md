@@ -68,6 +68,6 @@ pipenv shell
 python -m pytest
 
 # Run pytest tests with coverage
- python -m pytest --cov='.' --cov-report=html
+python -m pytest --cov='.' --cov-report=html
 ```
 > HTML coverage reports will be saved in the `htmlcov` directory.
