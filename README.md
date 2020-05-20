@@ -6,7 +6,11 @@ Python script that uses `FMPCloud API` to fetch 10-Q and 10-K statements for giv
 ```shell script
 usage: 
     # Get all available statements
+    # Output will be stored in $HOMEDIR/fmpcloud by default
     main.py --ticker HUBS
+    
+    # Get all available statements in /home/user/joe/reports (override default output path)
+    main.py --ticker HUBS --output /home/user/joe/reports
     
     # Get statements from 2017 till 2020
     main.py --ticker HUBS --start 2017 --end 2020
@@ -25,7 +29,9 @@ optional arguments:
   --ticker TICKER  Company ticker
   --start START    Start year of financial statements.
   --end END        End year of financial statements.
+  --output OUTPUT  Path to directory where output will be stored.
 ```
+> Output will be saved in `$HOME/fmpcloud` by default. To override use `--output`.
 
 ## Setup
 

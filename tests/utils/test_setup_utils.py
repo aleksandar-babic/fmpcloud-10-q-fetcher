@@ -51,7 +51,7 @@ class TestSetupUtils:
 
     @mock.patch('argparse.ArgumentParser.parse_args',
                 return_value=argparse.Namespace(ticker='NFLX', start=2015, end=2020))
-    def test_setup(self, fs):
+    def test_setup(self, mock_args, fs):
         setup_config = setup()
 
         actual_raw_path = setup_config['dirs']['raw']
@@ -59,7 +59,7 @@ class TestSetupUtils:
 
         expected_setup_config_without_raw = {
             'dirs': {
-                'data': 'data'
+                'data': f'{get_home_dir()}/fmpcloud'
             },
             'args': {
                 'ticker': 'NFLX',
@@ -67,8 +67,37 @@ class TestSetupUtils:
                 'end': 2020
             }
         }
+
         del setup_config['dirs']['raw']
-        assert setup_config == expected_setup_config_without_raw
+        assert expected_setup_config_without_raw == setup_config
+
+    @mock.patch('argparse.ArgumentParser.parse_args',
+                return_value=argparse.Namespace(
+                    ticker='NFLX',
+                    start=2015,
+                    end=2020,
+                    output=f'{get_home_dir()}/fakefspytestoverride'
+                ))
+    def test_setup_override_output(self, mock_args, fs):
+        setup_config = setup()
+
+        actual_raw_path = setup_config['dirs']['raw']
+        assert tempfile.gettempdir() in actual_raw_path
+
+        expected_setup_config_without_raw = {
+            'dirs': {
+                'data': f'{get_home_dir()}/fakefspytestoverride'
+            },
+            'args': {
+                'ticker': 'NFLX',
+                'start': 2015,
+                'end': 2020,
+                'output': f'{get_home_dir()}/fakefspytestoverride'
+            }
+        }
+
+        del setup_config['dirs']['raw']
+        assert expected_setup_config_without_raw == setup_config
 
     def test_create_temp_dir(self, fs):
         temp_dir_path = create_temp_dir('pytest-fakefs')
@@ -83,3 +112,9 @@ class TestSetupUtils:
         nonexisting_path = '/tmp/fmpcloudpytest-fakefs-non-existing-dir'
         with pytest.raises(FileNotFoundError):
             rm_dir(nonexisting_path)
+
+    def test_get_home_dir(self):
+        expected_home_dir = os.environ.get('HOME')
+
+        assert expected_home_dir is not None
+        assert get_home_dir() == expected_home_dir

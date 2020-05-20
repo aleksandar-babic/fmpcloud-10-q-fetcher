@@ -26,8 +26,11 @@ def main():
     except Exception as e:
         logger.info(f'Failed to process ticker {ticker}. Error:{e}')
     finally:
-        rm_dir(setup_res['dirs']['raw'])
-        logger.debug('Deleted raw financial statements.')
+        try:
+            rm_dir(setup_res['dirs']['raw'])
+            logger.debug('Deleted raw financial statements.')
+        except FileNotFoundError:
+            logger.debug('Nothing to cleanup.')
 
 
 if __name__ == '__main__':
