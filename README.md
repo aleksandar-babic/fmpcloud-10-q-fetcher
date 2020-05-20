@@ -54,7 +54,7 @@ python main.py --ticker NFLX --start 2010 --end 2015
 ```
 > Transformed resulting report will be saved in the `data` directory.
   
-> Directory `data/.raw` contains untransformed data received from the API.
+> Optionally, env variable `FMPCLOUD_LOGLEVEL` can be set to value `DEBUG` for more verbose logging.
 
 ### Running tests
 ```shell script

@@ -10,7 +10,10 @@ from datetime import datetime
 
 def get_logger() -> logging.Logger:
     logger = logging.getLogger()
-    logging.basicConfig(stream=sys.stdout, level=logging.INFO)
+
+    log_level_env = os.environ.get('FMPCLOUD_LOGLEVEL')
+    log_level = logging.INFO if log_level_env is None else log_level_env
+    logging.basicConfig(stream=sys.stdout, level=log_level)
 
     return logger
 
