@@ -1,15 +1,22 @@
 import argparse
+import tempfile
+import shutil
+import os
 from pathlib import Path
 from datetime import datetime
 
 
-def setup_base_dirs(data_dir: str, raw_dir: str):
-    setup_dir(data_dir)
-    setup_dir(raw_dir)
-
-
 def setup_dir(dir_path: str):
     Path(dir_path).mkdir(parents=True, exist_ok=True)
+
+
+def create_temp_dir(prefix: str = 'fmpcloud-data') -> str:
+    return tempfile.mkdtemp(prefix=prefix)
+
+
+def rm_dir(dir_path: str) -> bool:
+    shutil.rmtree(dir_path)
+    return not os.path.exists(dir_path)
 
 
 def setup_args() -> dict:
@@ -41,16 +48,16 @@ def setup_args() -> dict:
 
 
 def setup() -> dict:
-    DATA_DIR = 'data'
-    RAW_DIR = f'{DATA_DIR}/.raw'
-    setup_base_dirs(DATA_DIR, RAW_DIR)
+    raw_dir = create_temp_dir()
+    data_dir = f'data'
+    setup_dir(data_dir)
 
     args = setup_args()
 
     return {
         'dirs': {
-            'data': DATA_DIR,
-            'raw': RAW_DIR
+            'data': data_dir,
+            'raw': raw_dir
         },
         'args': args
     }

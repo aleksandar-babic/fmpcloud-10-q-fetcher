@@ -1,6 +1,7 @@
 import os
 from unittest import mock
 import argparse
+import tempfile
 from datetime import datetime
 
 import pytest
@@ -15,16 +16,6 @@ class TestSetupUtils:
         assert os.path.exists(fake_path) is False
         setup_dir(fake_path)
         assert os.path.exists(fake_path)
-
-    def test_setup_base_dirs(self, fs):
-        data_dir = 'fake/path/data'
-        raw_dir = f'fake/path/raw'
-
-        assert os.path.exists(data_dir) is False
-        assert os.path.exists(raw_dir) is False
-        setup_base_dirs(data_dir, raw_dir)
-        assert os.path.exists(data_dir)
-        assert os.path.exists(raw_dir)
 
     @mock.patch('argparse.ArgumentParser.parse_args',
                 return_value=argparse.Namespace(ticker='NFLX', start=2015, end=2020))
@@ -63,10 +54,12 @@ class TestSetupUtils:
     def test_setup(self, fs):
         setup_config = setup()
 
-        expected_setup_config = {
+        actual_raw_path = setup_config['dirs']['raw']
+        assert tempfile.gettempdir() in actual_raw_path
+
+        expected_setup_config_without_raw = {
             'dirs': {
-                'data': 'data',
-                'raw': 'data/.raw'
+                'data': 'data'
             },
             'args': {
                 'ticker': 'NFLX',
@@ -74,5 +67,19 @@ class TestSetupUtils:
                 'end': 2020
             }
         }
+        del setup_config['dirs']['raw']
+        assert setup_config == expected_setup_config_without_raw
 
-        assert setup_config == expected_setup_config
+    def test_create_temp_dir(self, fs):
+        temp_dir_path = create_temp_dir('pytest-fakefs')
+        assert os.path.exists(temp_dir_path)
+
+    def test_rm_dir(self, fs):
+        temp_dir_path = create_temp_dir('pytest-fakefs')
+
+        assert rm_dir(temp_dir_path)
+
+    def test_rm_dir_nonexisting(self, fs):
+        nonexisting_path = '/tmp/fmpcloudpytest-fakefs-non-existing-dir'
+        with pytest.raises(FileNotFoundError):
+            rm_dir(nonexisting_path)
