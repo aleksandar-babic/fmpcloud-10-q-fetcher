@@ -9,6 +9,7 @@ pytest-mock = "*"
 requests-mock = "*"
 pyfakefs = "*"
 pytest-cov = "*"
+coverage-badge = "*"
 
 [packages]
 requests = "*"
