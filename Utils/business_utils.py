@@ -1,4 +1,5 @@
 import pandas as pd
+import logging
 
 from FMPCloudApiClient import FMPCloudApiClient
 from .utils import save_bytes_to_file, generate_target_filenames, unzip_pwd
@@ -31,7 +32,7 @@ def merge_excel(source_directory: str, target_dir: str, config: dict) -> dict:
     }
 
 
-def get_tickers(args):
+def get_tickers(args: dict) -> list:
     return [{
         'name': ticker,
         'start_range': args['start'],
@@ -39,7 +40,7 @@ def get_tickers(args):
     } for ticker in args['ticker']]
 
 
-def process_tickers(config, logger):
+def process_tickers(config: dict, logger: logging.Logger):
     for ticker in config['tickers']:
         try:
             zip_path = save_raw_stmnts(config['dirs']['raw'], ticker['name'], config['api_key'])
