@@ -1,9 +1,11 @@
 # FMPCloud 10-Q statements fetcher
-
+![cov](.github/coverage_badge.svg)
+  
 Python script that uses `FMPCloud API` to fetch 10-Q and 10-K statements for given company.
 
 ## Usage
 ```shell script
+usage: 
 usage: 
     # Get all available statements
     # Output will be stored in $HOMEDIR/fmpcloud by default
@@ -12,8 +14,14 @@ usage:
     # Get all available statements in /home/user/joe/reports (override default output path)
     main.py --ticker HUBS --output /home/user/joe/reports
     
+    # Get all available statements for multiple companies in default location
+    main.py --ticker HUBS,NFLX,AAPL
+    
     # Get statements from 2017 till 2020
     main.py --ticker HUBS --start 2017 --end 2020
+    
+    # Get statements from 2017 till 2020 for multiple companies
+    main.py --ticker HUBS,NFLX,AAPL --start 2017 --end 2020
      
     # Get statements from 2017 till present
     main.py --ticker HUBS --start 2017
@@ -26,7 +34,7 @@ Script to fetch and parse Edgar 10-Q and 10-K financial statements.
 
 optional arguments:
   -h, --help       show this help message and exit
-  --ticker TICKER  Company ticker
+  --ticker TICKER  Comma delimited list of company tickers.
   --start START    Start year of financial statements.
   --end END        End year of financial statements.
   --output OUTPUT  Path to directory where output will be stored.

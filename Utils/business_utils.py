@@ -1,7 +1,7 @@
 import pandas as pd
 
 from FMPCloudApiClient import FMPCloudApiClient
-from .utils import save_bytes_to_file, generate_target_filenames
+from .utils import save_bytes_to_file, generate_target_filenames, unzip_pwd
 
 
 def save_raw_stmnts(directory: str, ticker: str, api_key: str) -> str:
@@ -15,10 +15,10 @@ def save_raw_stmnts(directory: str, ticker: str, api_key: str) -> str:
 
 
 def merge_excel(source_directory: str, target_dir: str, config: dict) -> dict:
-    files = generate_target_filenames(source_directory, config['start_date'], config['end_date'])
+    files = generate_target_filenames(source_directory, config['start_range'], config['end_range'])
     start_year = files[0]['date'].split('-')[0]
     end_year = files[-1]['date'].split('-')[0]
-    out_path = f"{target_dir}/{config['ticker']}({start_year}-{end_year}).xlsx"
+    out_path = f"{target_dir}/{config['name']}({start_year}-{end_year}).xlsx"
 
     with pd.ExcelWriter(out_path) as writer:
         for file in files:
@@ -29,3 +29,24 @@ def merge_excel(source_directory: str, target_dir: str, config: dict) -> dict:
         'path': out_path,
         'range': f'{start_year}-{end_year}'
     }
+
+
+def get_tickers(args):
+    return [{
+        'name': ticker,
+        'start_range': args['start'],
+        'end_range': args['end']
+    } for ticker in args['ticker']]
+
+
+def process_tickers(config, logger):
+    for ticker in config['tickers']:
+        try:
+            zip_path = save_raw_stmnts(config['dirs']['raw'], ticker['name'], config['api_key'])
+            extracted_path = unzip_pwd(zip_path)
+            logger.debug(f'Saved raw financial statements in {extracted_path}.')
+
+            out = merge_excel(extracted_path, config['dirs']['data'], ticker)
+            logger.info(f"Saved financial statements for {ticker['name']}({out['range']}) in {out['path']}.")
+        except Exception as e:
+            logger.info(f'Failed to process ticker {ticker}. Error:{e}')

@@ -125,3 +125,25 @@ class TestUtils:
         assert len(files) == 5
         assert all('path' in file and 'date' in file for file in files)
         assert all(file['date'] == file['path'].split('file1_')[1].strip('.xlsx') for file in files)
+
+    def test_generate_target_filenames_exclude_pdf(self, mocker):
+        source_dir = 'fake/path'
+        start_range = 2015
+        end_range = 2020
+        fake_file_paths = [
+            '/fake/path/file1_2020-05-01.xlsx',
+            '/fake/path/file1_2020-05-02.xlsx',
+            '/fake/path/file1_2020-05-03.xlsx',
+            '/fake/path/file1_2010-05-01.xlsx',
+            '/fake/path/file1_2012-05-01.xlsx',
+            '/fake/path/file1_2015-05-04.pdf',
+            '/fake/path/file1_2018-05-05.xlsx'
+        ]
+
+        mocker.patch('os.listdir', return_value=fake_file_paths)
+
+        files = generate_target_filenames(source_dir, start_range, end_range)
+
+        assert len(files) == 4
+        assert all('path' in file and 'date' in file for file in files)
+        assert all(file['date'] == file['path'].split('file1_')[1].strip('.xlsx') for file in files)

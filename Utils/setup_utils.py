@@ -33,8 +33,14 @@ def setup_args() -> dict:
     # Get all available statements in /home/user/joe/reports (override default output path)
     main.py --ticker HUBS --output /home/user/joe/reports
     
+    # Get all available statements for multiple companies in default location
+    main.py --ticker HUBS,NFLX,AAPL
+    
     # Get statements from 2017 till 2020
     main.py --ticker HUBS --start 2017 --end 2020
+    
+    # Get statements from 2017 till 2020 for multiple companies
+    main.py --ticker HUBS,NFLX,AAPL --start 2017 --end 2020
      
     # Get statements from 2017 till present
     main.py --ticker HUBS --start 2017
@@ -43,7 +49,8 @@ def setup_args() -> dict:
     main.py --ticker HUBS --end 2018
     '''
     parser = argparse.ArgumentParser(description=description, usage=usage)
-    parser.add_argument('--ticker', type=str, help='Company ticker', required=True)
+    parser.add_argument('--ticker', type=lambda s: s.split(','),
+                        help='Comma delimited list of company tickers.', required=True)
     parser.add_argument('--start', type=int, help='Start year of financial statements.', default=0)
     parser.add_argument('--end', type=int, help='End year of financial statements.', default=datetime.now().year)
     parser.add_argument('--output', type=str, help='Path to directory where output will be stored.')
