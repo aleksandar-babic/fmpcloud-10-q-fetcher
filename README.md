@@ -6,7 +6,6 @@ Python script that uses `FMPCloud API` to fetch 10-Q and 10-K statements for giv
 ## Usage
 ```shell script
 usage: 
-usage: 
     # Get all available statements
     # Output will be stored in $HOMEDIR/fmpcloud by default
     main.py --ticker HUBS
