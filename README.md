@@ -1,6 +1,6 @@
 # FMPCloud 10-Q statements fetcher
 ![cov](.github/coverage_badge.svg)
-![workflow](https://github.com/aleksandar-babic/fmpcloud-10-q-fetcher/workflows/.github/workflows/coverage.yml/badge.svg)
+![workflow-badge](https://github.com/aleksandar-babic/fmpcloud-10-q-fetcher/workflows/Run%20Coverage%20tests/badge.svg)
   
 Python script that uses `FMPCloud API` to fetch 10-Q and 10-K statements for given company.
 
