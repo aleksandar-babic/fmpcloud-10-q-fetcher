@@ -1,8 +1,8 @@
 import pandas as pd
 import logging
 
-from FMPCloudApiClient import FMPCloudApiClient
-from UserConfigParser import UserConfigParser
+from financestatements.FMPCloudApiClient import FMPCloudApiClient
+from financestatements.UserConfigParser import UserConfigParser
 from .utils import save_bytes_to_file, generate_target_filenames, unzip_pwd
 
 

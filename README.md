@@ -8,28 +8,28 @@ Python script that uses `FMPCloud API` to fetch 10-Q and 10-K statements for giv
 usage: 
     # Get all available statements
     # Output will be stored in $HOMEDIR/fmpcloud by default
-    main.py --ticker HUBS
+    finance-statements --ticker HUBS
     
     # Get all available statements in /home/user/joe/reports (override default output path)
-    main.py --ticker HUBS --output /home/user/joe/reports
+    finance-statements --ticker HUBS --output /home/user/joe/reports
     
     # Get all available statements for multiple companies in default location
-    main.py --ticker HUBS,NFLX,AAPL
+    finance-statements --ticker HUBS,NFLX,AAPL
     
     # Get all available statements for multiple companies from config file
-    main.py --config example_config.yml
+    finance-statements --config example_config.yml
     
     # Get statements from 2017 till 2020
-    main.py --ticker HUBS --start 2017 --end 2020
+    finance-statements --ticker HUBS --start 2017 --end 2020
     
     # Get statements from 2017 till 2020 for multiple companies
-    main.py --ticker HUBS,NFLX,AAPL --start 2017 --end 2020
+    finance-statements --ticker HUBS,NFLX,AAPL --start 2017 --end 2020
      
     # Get statements from 2017 till present
-    main.py --ticker HUBS --start 2017
+    finance-statements --ticker HUBS --start 2017
     
     # Get statements from oldest till 2018
-    main.py --ticker HUBS --end 2018
+    finance-statements --ticker HUBS --end 2018
     
 
 Script to fetch and parse Edgar 10-Q and 10-K financial statements.
@@ -65,10 +65,10 @@ pipenv shell
 export FMPCLOUD_API_KEY=api_key_value
 
 # Run the script, get statements for all years
-python main.py --ticker NFLX
+python finance-statements --ticker NFLX
 
 # Run the script, get statements for period 2010-2015
-python main.py --ticker NFLX --start 2010 --end 2015
+python finance-statements --ticker NFLX --start 2010 --end 2015
 ```
 > Transformed resulting report will be saved in the `data` directory.
   
@@ -111,6 +111,6 @@ tickers:
 
 #### Config usage
 ```shell script
-python main.py --config example_config.yml
+python finance-statements --config example_config.yml
 ```
 > Example available in the git repo, named `example_config.yml`.

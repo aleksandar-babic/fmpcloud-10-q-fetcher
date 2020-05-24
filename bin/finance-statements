@@ -1,4 +1,6 @@
-from Utils import get_logger, setup, safe_get_env_var, rm_dir, process_tickers, get_tickers
+#!/usr/bin/env python
+
+from financestatements.Utils import get_logger, setup, safe_get_env_var, rm_dir, process_tickers, get_tickers
 
 
 def main():

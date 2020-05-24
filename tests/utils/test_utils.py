@@ -1,11 +1,10 @@
 from os import environ
 from time import time
 from unittest.mock import patch, mock_open
-import builtins
 
 import pytest
 
-from Utils import *
+from financestatements.Utils import *
 
 
 class TestUtils:

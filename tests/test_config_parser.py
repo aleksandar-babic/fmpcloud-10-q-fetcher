@@ -1,6 +1,6 @@
 import pytest
 
-from UserConfigParser import UserConfigParser, ConfigNotFoundError
+from financestatements.UserConfigParser import UserConfigParser, ConfigNotFoundError
 
 
 class TestConfigParser:

@@ -1,6 +1,6 @@
 import pytest
 
-from FMPCloudApiClient import FMPCloudApiClient
+from financestatements.FMPCloudApiClient import FMPCloudApiClient
 
 
 class TestBusinessUtils:

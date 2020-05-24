@@ -1,8 +1,7 @@
-import os
 import pathlib
 import pytest
 
-from Utils import *
+from financestatements.Utils import *
 
 
 class TestBusinessUtils:
