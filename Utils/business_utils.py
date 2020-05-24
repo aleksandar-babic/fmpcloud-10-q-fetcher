@@ -2,6 +2,7 @@ import pandas as pd
 import logging
 
 from FMPCloudApiClient import FMPCloudApiClient
+from UserConfigParser import UserConfigParser
 from .utils import save_bytes_to_file, generate_target_filenames, unzip_pwd
 
 
@@ -33,6 +34,13 @@ def merge_excel(source_directory: str, target_dir: str, config: dict) -> dict:
 
 
 def get_tickers(args: dict) -> list:
+    if 'config' in args and args['config'] is not None:
+        config = UserConfigParser(args['config']).get_parsed()
+        if 'tickers' not in config:
+            raise ValueError('Invalid config file content. Expected key `tickers`.')
+
+        return config['tickers']
+
     return [{
         'name': ticker,
         'start_range': args['start'],

@@ -1,0 +1,11 @@
+---
+
+tickers:
+  -
+    name: AAPL
+    start_range: 2015
+    end_range: 2020
+  -
+    name: HUBS
+    start_range: 2019
+    end_range: 2020

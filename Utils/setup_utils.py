@@ -36,6 +36,9 @@ def setup_args() -> dict:
     # Get all available statements for multiple companies in default location
     main.py --ticker HUBS,NFLX,AAPL
     
+    # Get all available statements for multiple companies from config file
+    main.py --config example_config.yml
+    
     # Get statements from 2017 till 2020
     main.py --ticker HUBS --start 2017 --end 2020
     
@@ -50,15 +53,20 @@ def setup_args() -> dict:
     '''
     parser = argparse.ArgumentParser(description=description, usage=usage)
     parser.add_argument('--ticker', type=lambda s: s.split(','),
-                        help='Comma delimited list of company tickers.', required=True)
+                        help='Comma delimited list of company tickers.')
     parser.add_argument('--start', type=int, help='Start year of financial statements.', default=0)
     parser.add_argument('--end', type=int, help='End year of financial statements.', default=datetime.now().year)
+    parser.add_argument('--config', type=str, help='Path to the company configuration file.')
     parser.add_argument('--output', type=str, help='Path to directory where output will be stored.')
     args = parser.parse_args()
     args_dict = vars(args)
 
     if args_dict['start'] > args_dict['end']:
         raise ValueError('start range cant be greater than end range.')
+
+    if ('ticker' not in args_dict or args_dict['ticker'] is None) and (
+            'config' not in args_dict or args_dict['config'] is None):
+        raise ValueError('Either --config or --ticker option is required.')
 
     return args_dict
 

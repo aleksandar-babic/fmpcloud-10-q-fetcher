@@ -16,6 +16,9 @@ usage:
     # Get all available statements for multiple companies in default location
     main.py --ticker HUBS,NFLX,AAPL
     
+    # Get all available statements for multiple companies from config file
+    main.py --config example_config.yml
+    
     # Get statements from 2017 till 2020
     main.py --ticker HUBS --start 2017 --end 2020
     
@@ -36,10 +39,12 @@ optional arguments:
   --ticker TICKER  Comma delimited list of company tickers.
   --start START    Start year of financial statements.
   --end END        End year of financial statements.
+  --config CONFIG  Path to the company configuration file.
   --output OUTPUT  Path to directory where output will be stored.
 ```
 > Output will be saved in `$HOME/fmpcloud` by default. To override use `--output`.
-
+  
+> Either `--ticker` or `--config` option should be specified, not both. If both specified, config will have priority.
 ## Setup
 
 ### Requirements:
@@ -84,3 +89,28 @@ python -m pytest
 python -m pytest --cov='.' --cov-report=html
 ```
 > HTML coverage reports will be saved in the `htmlcov` directory.
+
+### Configuration file
+If you need reports for many companies and/or different time ranges per company, config file is your friend.
+  
+#### Config content
+```yaml
+---
+
+tickers:
+  -
+    name: AAPL
+    start_range: 2015
+    end_range: 2020
+  -
+    name: HUBS
+    start_range: 2019
+    end_range: 2020
+```
+> Tickers is a list, each item in the list represents one report for the specified company.
+
+#### Config usage
+```shell script
+python main.py --config example_config.yml
+```
+> Example available in the git repo, named `example_config.yml`.

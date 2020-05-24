@@ -81,6 +81,42 @@ class TestBusinessUtils:
 
         assert tickers == expected_tickers
 
+    def test_get_tickers_config(self):
+        FIXTURE_CONFIG = 'tests/fixtures/config.yml'
+
+        args = {
+            'config': FIXTURE_CONFIG,
+            'output': None
+        }
+
+        tickers = get_tickers(args)
+
+        expected_tickers = [
+            {
+                'name': 'AAPL',
+                'start_range': 2015,
+                'end_range': 2020
+            },
+            {
+                'name': 'HUBS',
+                'start_range': 2019,
+                'end_range': 2020
+            }
+        ]
+
+        assert tickers == expected_tickers
+
+    def test_get_tickers_empty_config(self):
+        FIXTURE_PATH = 'tests/fixtures/invalid_config.yml'
+
+        with pytest.raises(ValueError):
+            args = {
+                'config': FIXTURE_PATH,
+                'output': None
+            }
+
+            get_tickers(args)
+
     def test_process_tickers(self, requests_mock, hubs_zip, fs):
         api_key = 'demo'
         raw_dir = create_temp_dir()

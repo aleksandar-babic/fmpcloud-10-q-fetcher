@@ -50,6 +50,12 @@ class TestSetupUtils:
             setup_args()
 
     @mock.patch('argparse.ArgumentParser.parse_args',
+                return_value=argparse.Namespace(start=2015, end=2020))
+    def test_setup_args_no_ticker_config(self, mock_args):
+        with pytest.raises(ValueError):
+            setup_args()
+
+    @mock.patch('argparse.ArgumentParser.parse_args',
                 return_value=argparse.Namespace(ticker='NFLX', start=2015, end=2020))
     def test_setup(self, mock_args, fs):
         setup_config = setup()

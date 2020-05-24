@@ -1,0 +1,7 @@
+---
+
+invalid:
+  -
+    name: AAPL
+    start_range: 2015
+    end_range: 2020
