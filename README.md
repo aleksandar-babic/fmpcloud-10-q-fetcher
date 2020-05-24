@@ -1,5 +1,6 @@
 # FMPCloud 10-Q statements fetcher
 ![cov](.github/coverage_badge.svg)
+![workflow](https://github.com/aleksandar-babic/fmpcloud-10-q-fetcher/workflows/.github/workflows/coverage.yml/badge.svg)
   
 Python script that uses `FMPCloud API` to fetch 10-Q and 10-K statements for given company.
 
@@ -45,7 +46,28 @@ optional arguments:
 > Output will be saved in `$HOME/fmpcloud` by default. To override use `--output`.
   
 > Either `--ticker` or `--config` option should be specified, not both. If both specified, config will have priority.
-## Setup
+## End-user Setup
+
+### Requirements:
+* [FMPCloud API account](https://fmpcloud.io/plans)
+* Python 3.8
+* Pip
+
+### Setup steps:
+```shell script
+pip install --upgrade https://github.com/aleksandar-babic/fmpcloud-10-q-fetcher
+
+# Export FMPCloud API key to environment variable
+# If you don't have the account yet, use `demo` for api key value
+export FMPCLOUD_API_KEY=api_key_value
+
+# Run the script, get statements for all years
+python finance-statements --ticker NFLX
+
+# Run the script, get statements for period 2010-2015
+python finance-statements --ticker NFLX --start 2010 --end 2015
+```
+## Development Setup
 
 ### Requirements:
 * [FMPCloud API account](https://fmpcloud.io/plans)
@@ -70,8 +92,6 @@ python finance-statements --ticker NFLX
 # Run the script, get statements for period 2010-2015
 python finance-statements --ticker NFLX --start 2010 --end 2015
 ```
-> Transformed resulting report will be saved in the `data` directory.
-  
 > Optionally, env variable `FMPCLOUD_LOGLEVEL` can be set to value `DEBUG` for more verbose logging.
 
 ### Running tests
