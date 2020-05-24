@@ -9,28 +9,28 @@ Python script that uses `FMPCloud API` to fetch 10-Q and 10-K statements for giv
 usage: 
     # Get all available statements
     # Output will be stored in $HOMEDIR/fmpcloud by default
-    finance-statements --ticker HUBS
+    finance-statements.py --ticker HUBS
     
     # Get all available statements in /home/user/joe/reports (override default output path)
-    finance-statements --ticker HUBS --output /home/user/joe/reports
+    finance-statements.py --ticker HUBS --output /home/user/joe/reports
     
     # Get all available statements for multiple companies in default location
-    finance-statements --ticker HUBS,NFLX,AAPL
+    finance-statements.py --ticker HUBS,NFLX,AAPL
     
     # Get all available statements for multiple companies from config file
-    finance-statements --config example_config.yml
+    finance-statements.py --config example_config.yml
     
     # Get statements from 2017 till 2020
-    finance-statements --ticker HUBS --start 2017 --end 2020
+    finance-statements.py --ticker HUBS --start 2017 --end 2020
     
     # Get statements from 2017 till 2020 for multiple companies
-    finance-statements --ticker HUBS,NFLX,AAPL --start 2017 --end 2020
+    finance-statements.py --ticker HUBS,NFLX,AAPL --start 2017 --end 2020
      
     # Get statements from 2017 till present
-    finance-statements --ticker HUBS --start 2017
+    finance-statements.py --ticker HUBS --start 2017
     
     # Get statements from oldest till 2018
-    finance-statements --ticker HUBS --end 2018
+    finance-statements.py --ticker HUBS --end 2018
     
 
 Script to fetch and parse Edgar 10-Q and 10-K financial statements.
@@ -62,10 +62,10 @@ pip install --upgrade https://github.com/aleksandar-babic/fmpcloud-10-q-fetcher
 export FMPCLOUD_API_KEY=api_key_value
 
 # Run the script, get statements for all years
-python finance-statements --ticker NFLX
+finance-statements.py --ticker NFLX
 
 # Run the script, get statements for period 2010-2015
-python finance-statements --ticker NFLX --start 2010 --end 2015
+finance-statements.py --ticker NFLX --start 2010 --end 2015
 ```
 ## Development Setup
 
@@ -87,10 +87,10 @@ pipenv shell
 export FMPCLOUD_API_KEY=api_key_value
 
 # Run the script, get statements for all years
-python finance-statements --ticker NFLX
+finance-statements.py --ticker NFLX
 
 # Run the script, get statements for period 2010-2015
-python finance-statements --ticker NFLX --start 2010 --end 2015
+finance-statements.py --ticker NFLX --start 2010 --end 2015
 ```
 > Optionally, env variable `FMPCLOUD_LOGLEVEL` can be set to value `DEBUG` for more verbose logging.
 
@@ -131,6 +131,6 @@ tickers:
 
 #### Config usage
 ```shell script
-python finance-statements --config example_config.yml
+finance-statements.py --config example_config.yml
 ```
 > Example available in the git repo, named `example_config.yml`.

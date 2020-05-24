@@ -28,28 +28,28 @@ def setup_args() -> dict:
     usage = '''
     # Get all available statements
     # Output will be stored in $HOMEDIR/fmpcloud by default
-    finance-statements --ticker HUBS
+    finance-statements.py --ticker HUBS
     
     # Get all available statements in /home/user/joe/reports (override default output path)
-    finance-statements --ticker HUBS --output /home/user/joe/reports
+    finance-statements.py --ticker HUBS --output /home/user/joe/reports
     
     # Get all available statements for multiple companies in default location
-    finance-statements --ticker HUBS,NFLX,AAPL
+    finance-statements.py --ticker HUBS,NFLX,AAPL
     
     # Get all available statements for multiple companies from config file
-    finance-statements --config example_config.yml
+    finance-statements.py --config example_config.yml
     
     # Get statements from 2017 till 2020
-    finance-statements --ticker HUBS --start 2017 --end 2020
+    finance-statements.py --ticker HUBS --start 2017 --end 2020
     
     # Get statements from 2017 till 2020 for multiple companies
-    finance-statements --ticker HUBS,NFLX,AAPL --start 2017 --end 2020
+    finance-statements.py --ticker HUBS,NFLX,AAPL --start 2017 --end 2020
      
     # Get statements from 2017 till present
-    finance-statements --ticker HUBS --start 2017
+    finance-statements.py --ticker HUBS --start 2017
     
     # Get statements from oldest till 2018
-    finance-statements --ticker HUBS --end 2018
+    finance-statements.py --ticker HUBS --end 2018
     '''
     parser = argparse.ArgumentParser(description=description, usage=usage)
     parser.add_argument('--ticker', type=lambda s: s.split(','),

@@ -23,6 +23,6 @@ setup(name='financestatements',
       ],
       zip_safe=False,
       scripts=[
-          'bin/finance-statements'
+          'bin/finance-statements.py'
       ]
       )
